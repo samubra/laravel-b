@@ -72,6 +72,12 @@
                     </li>
                 </ul>
             </li>
+            <li class="{{ active_class(Active::checkUriPattern('admin/category/*')) }}">
+                <a href="{{ route('admin.category.index') }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>分类管理</span>
+                </a>
+            </li>
             @endauth
 
             <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">

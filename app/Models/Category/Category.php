@@ -5,12 +5,14 @@ namespace App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kalnoy\Nestedset\NodeTrait;
+use App\Models\Category\Traits\CategoryAttribute;
+use App\Models\Category\Traits\CategoryScopes;
 
 class Category extends Model
 {
-    use SoftDeletes,NodeTrait;
+    use SoftDeletes,NodeTrait,CategoryAttribute,CategoryScopes;
 
-    protected $table;
+    protected $table = 'categories';
 
     /**
      * The attributes that are mass assignable.
@@ -45,5 +47,15 @@ class Category extends Model
     {
         return 'parent_id';
     }
+
+    const typeList = [
+        'train_type'    =>  '培训类别',
+        'operation_type'=>  '操作项目类别',
+        'plan_status'   =>  '培训计划状态',
+        'apply_status'  =>  '培训申请受理状态',
+        'edu_type'      =>  '文化程度',
+        'health_type' =>  '健康状况',
+        'teacher_type' => '教师类别'
+    ];
 
 }

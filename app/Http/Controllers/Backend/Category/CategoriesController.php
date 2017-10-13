@@ -10,5 +10,9 @@ use App\Http\Requests\Backend\Category\StoreCategoryRequest;
 
 class CategoriesController extends Controller
 {
-
+    public function index(ManageCategoryRequest $request)
+    {
+        //dd('samubra');
+        return view('backend.category.index');
+    }
 }

@@ -16,7 +16,7 @@ class CategoryRepository extends BaseRepository
     /**
      * Associated Repository Model.
      */
-    const MODEL = Categor::class;
+    const MODEL = Category::class;
 
   
 
@@ -26,33 +26,16 @@ class CategoryRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getByPermission($permissions, $by = 'name')
+    public function getByType($type)
     {
-        if (! is_array($permissions)) {
-            $permissions = [$permissions];
+        if (! is_array($type)) {
+            $type = [$type];
         }
 
-        return $this->query()->whereHas('roles.permissions', function ($query) use ($permissions, $by) {
-            $query->whereIn('permissions.'.$by, $permissions);
-        })->get();
+        return $this->query()->whereIn('type', $type)->get();
     }
 
-    /**
-     * @param        $roles
-     * @param string $by
-     *
-     * @return mixed
-     */
-    public function getByRole($roles, $by = 'name')
-    {
-        if (! is_array($roles)) {
-            $roles = [$roles];
-        }
 
-        return $this->query()->whereHas('roles', function ($query) use ($roles, $by) {
-            $query->whereIn('roles.'.$by, $roles);
-        })->get();
-    }
 
     /**
      * @param int  $status
@@ -60,41 +43,25 @@ class CategoryRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getForDataTable($status = 1, $trashed = false)
+    public function getForDataTable($type=null, $trashed = false)
     {
         /**
          * Note: You must return deleted_at or the User getActionButtonsAttribute won't
          * be able to differentiate what buttons to show for each row.
          */
-        $dataTableQuery = $this->query()
-            ->with('roles')
-            ->select([
-                config('access.users_table').'.id',
-                config('access.users_table').'.first_name',
-                config('access.users_table').'.last_name',
-                config('access.users_table').'.email',
-                config('access.users_table').'.status',
-                config('access.users_table').'.confirmed',
-                config('access.users_table').'.created_at',
-                config('access.users_table').'.updated_at',
-                config('access.users_table').'.deleted_at',
-            ]);
+        $dataTableQuery = $this->query();
+        if(!is_null($type))
+            $dataTableQuery->type($type);
 
         if ($trashed == 'true') {
-            return $dataTableQuery->onlyTrashed();
+            $dataTableQuery->onlyTrashed();
         }
 
-        // active() is a scope on the UserScope trait
-        return $dataTableQuery->active($status);
+        return $dataTableQuery;
+
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUnconfirmedCount()
-    {
-        return $this->query()->where('confirmed', 0)->count();
-    }
+
 
     /**
      * @param array $input
