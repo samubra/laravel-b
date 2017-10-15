@@ -14,7 +14,7 @@ trait CategoryScopes
     public function scopeType($query,$type)
     {
         if(is_array($type))
-            return $query->whereIn('type', $type)->orderBy('_lft', 'asc');
-        return $query->where('type',$type)->orderBy('_lft', 'asc');
+            return $query->whereIn('category_type', $type)->orderBy('_lft', 'asc');
+        return $query->where('category_type',$type)->orderBy('_lft', 'asc');
     }
 }

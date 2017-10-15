@@ -7,10 +7,12 @@ use App\Models\Record\Traits\RecordAttribute;
 use App\Models\Record\Traits\RecordScopes;
 use App\Models\Record\Traits\RecordRelationship;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\BaseAttribute;
 
 class Record extends Model
 {
-    use RecordAttribute,
+    use BaseAttribute,
+        RecordAttribute,
         RecordScopes,
         RecordRelationship,
         SoftDeletes;
@@ -34,4 +36,25 @@ class Record extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function getRestoreUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeletePermanentlyUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeleteUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getEditUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getShowUrl()
+    {
+        return '';//route('',$this);
+    }
 }

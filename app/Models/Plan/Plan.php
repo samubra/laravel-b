@@ -7,10 +7,12 @@ use App\Models\Plan\Traits\PlanAttribute;
 use App\Models\Plan\Traits\PlanScopes;
 use App\Models\Plan\Traits\PlanRelationship;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\BaseAttribute;
 
 class Plan extends Model
 {
-    use PlanRelationship,
+    use BaseAttribute,
+        PlanRelationship,
         PlanAttribute,
         PlanScopes,
         SoftDeletes;
@@ -34,4 +36,25 @@ class Plan extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function getRestoreUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeletePermanentlyUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeleteUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getEditUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getShowUrl()
+    {
+        return '';//route('',$this);
+    }
 }

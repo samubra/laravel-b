@@ -7,10 +7,12 @@ use App\Models\Course\Traits\CourseAttribute;
 use App\Models\Course\Traits\CourseScopes;
 use App\Models\Course\Traits\CourseRelationship;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\BaseAttribute;
 
 class Course extends Model
 {
-    use CourseAttribute,
+    use BaseAttribute,
+        CourseAttribute,
         CourseScopes,
         CourseRelationship,
         SoftDeletes;
@@ -34,4 +36,25 @@ class Course extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function getRestoreUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeletePermanentlyUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeleteUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getEditUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getShowUrl()
+    {
+        return '';//route('',$this);
+    }
 }

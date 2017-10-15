@@ -15,7 +15,7 @@ class CategoryTableController extends Controller
     protected $category;
 
     /**
-     * @param UserRepository $users
+     * @param CategoryRepository $users
      */
     public function __construct(CategoryRepository $category)
     {
@@ -23,19 +23,20 @@ class CategoryTableController extends Controller
     }
 
     /**
-     * @param ManageUserRequest $request
+     * @param ManageCategoryRequest $request
      *
      * @return mixed
      */
     public function __invoke(ManageCategoryRequest $request)
     {
-        return Datatables::of($this->category->getForDataTable($request->get('type'), $request->get('trashed')))
-            ->select(['id','category_name','category_type','updated_at'])
+        $categoryModel = $this->category->getForDataTable($request->get('type'), $request->get('trashed'));
+        return Datatables::of($categoryModel)
         ->editColumn('category_type', function ($model) {
-            return $model->getTypeNameAttribute();
+            return $model->type_name;
         })
             ->addColumn('actions', function ($model) {
-                return $model->action_buttons;
+                return e($model->action_buttons,true);
+                //return '<a href="#edit-'.$model->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
             })
             ->withTrashed()
             ->make(true);

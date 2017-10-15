@@ -10,7 +10,7 @@ Route::group([
 ], function () {
 
     /*
-     * User Management
+     * Category Management
      */
     Route::group([
         'middleware' => 'access.routeNeedsRole:1',

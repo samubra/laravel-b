@@ -7,10 +7,12 @@ use App\Models\Apply\Traits\ApplyAttribute;
 use App\Models\Apply\Traits\ApplyScopes;
 use App\Models\Apply\Traits\ApplyRelationship;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\BaseAttribute;
 
 class Apply extends Model
 {
-    use ApplyAttribute,
+    use BaseAttribute,
+        ApplyAttribute,
         ApplyScopes,
         ApplyRelationship,
         SoftDeletes;
@@ -34,4 +36,25 @@ class Apply extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function getRestoreUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeletePermanentlyUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeleteUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getEditUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getShowUrl()
+    {
+        return '';//route('',$this);
+    }
 }

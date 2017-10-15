@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Kalnoy\Nestedset\NodeTrait;
 use App\Models\Category\Traits\CategoryAttribute;
 use App\Models\Category\Traits\CategoryScopes;
+use App\Models\Traits\BaseAttribute;
 
 class Category extends Model
 {
-    use SoftDeletes,NodeTrait,CategoryAttribute,CategoryScopes;
+    use BaseAttribute,SoftDeletes,NodeTrait,CategoryAttribute,CategoryScopes;
 
     protected $table = 'categories';
 
@@ -57,5 +58,26 @@ class Category extends Model
         'health_type' =>  '健康状况',
         'teacher_type' => '教师类别'
     ];
+
+    public function getRestoreUrl()
+    {
+        return url('/');//route('',$this);
+    }
+    public function getDeletePermanentlyUrl()
+    {
+        return url('/');//route('',$this);
+    }
+    public function getDeleteUrl()
+    {
+        return url('/');//route('',$this);
+    }
+    public function getEditUrl()
+    {
+        return url('/');//route('',$this);
+    }
+    public function getShowUrl()
+    {
+        return url('/');//route('',$this);
+    }
 
 }

@@ -7,10 +7,12 @@ use App\Models\Teacher\Traits\TeacherAttribute;
 use App\Models\Teacher\Traits\TeacherScopes;
 use App\Models\Teacher\Traits\TeacherRelationship;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\BaseAttribute;
 
 class Teacher extends Model
 {
-    use TeacherAttribute,
+    use BaseAttribute,
+        TeacherAttribute,
         TeacherScopes,
         TeacherRelationship,
         SoftDeletes;
@@ -34,4 +36,25 @@ class Teacher extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function getRestoreUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeletePermanentlyUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getDeleteUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getEditUrl()
+    {
+        return '';//route('',$this);
+    }
+    public function getShowUrl()
+    {
+        return '';//route('',$this);
+    }
 }
